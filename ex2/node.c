@@ -69,20 +69,27 @@ void insert_node_at(list *lst, int index, int data) {
 // Note: index is guarenteed to be valid.
 void delete_node_at(list *lst, int index) {
     node *temp = lst->head;
-    for (int i = 1; i < index; i ++) {
-        if (temp -> next != NULL) {
-            temp = temp->next;
-        }
-    }
-    if (index == 0) {
-        while (temp->next != lst->head) {
-            temp = temp->next;
-        }
-        temp->next = lst->head->next;
-        lst->head = lst->head->next;
+
+    if (lst->head->next == lst->head) {
+        lst->head = NULL;
     } else {
-        temp->next = temp->next->next; 
+        for (int i = 1; i < index; i ++) {
+            if (temp -> next != NULL) {
+                temp = temp->next;
+            }
+        }
+        if (index == 0) {
+            while (temp->next != lst->head) {
+                temp = temp->next;
+            }
+            temp->next = lst->head->next;
+            lst->head = lst->head->next;
+
+        } else {
+            temp->next = temp->next->next; 
+        }
     }
+
 
 }
 
