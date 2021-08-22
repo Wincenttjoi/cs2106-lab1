@@ -49,20 +49,6 @@ void insert_node_at(list *lst, int index, int data) {
         }
     }
 
-
-    // if (temp != NULL && index != 0) {
-    //     newNode->next = temp->next;
-    //     temp->next = newNode;
-    // } else if (temp != NULL && index == 0) {
-    //     newNode->next = temp;
-    //     temp = newNode;
-    // } else {
-    //     newNode->next = newNode;
-    //     lst->head = newNode;
-    // }
-
-
-
 }
 
 // Deletes node at index (counting from head starting from 0).
