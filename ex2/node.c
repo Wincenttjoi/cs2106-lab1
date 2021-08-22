@@ -42,7 +42,7 @@ void insert_node_at(list *lst, int index, int data) {
             lst->head = newNode;
             last->next = lst->head;
         } else {
-            node *cur = (node*)malloc(sizeof(node));
+            node *cur;
             cur = temp->next;
             temp->next = newNode;
             newNode->next = cur;
@@ -109,7 +109,8 @@ void reverse_list(list *lst) {
 // Resets list to an empty state (no nodes) and frees
 // any allocated memory in the process
 void reset_list(list *lst) {
-    if (lst->head->next == NULL) {
+    if (lst->head->next == lst->head) {
+        free(lst->head);
         free(lst->head->next);
         lst->head = NULL;
     } 
@@ -119,7 +120,7 @@ void reset_list(list *lst) {
         free(ptr);
         ptr = temp;
     }
-    free(ptr);
+    free(lst->head);
     lst->head = NULL;
 }
 
