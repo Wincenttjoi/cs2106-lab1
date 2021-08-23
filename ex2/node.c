@@ -57,7 +57,9 @@ void delete_node_at(list *lst, int index) {
     node *temp = lst->head;
 
     if (lst->head->next == lst->head) {
+        free(lst->head);
         lst->head = NULL;
+        
     } else {
         for (int i = 1; i < index; i ++) {
             if (temp -> next != NULL) {
@@ -68,15 +70,17 @@ void delete_node_at(list *lst, int index) {
             while (temp->next != lst->head) {
                 temp = temp->next;
             }
+            node *cur = lst->head;
             temp->next = lst->head->next;
             lst->head = lst->head->next;
+            free(cur);
 
         } else {
-            temp->next = temp->next->next; 
+            node *cur = temp->next;
+            temp->next = temp->next->next;
+            free(cur);
         }
     }
-
-
 }
 
 // Rotates list by the given offset.
