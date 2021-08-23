@@ -6,6 +6,7 @@
 *************************************/
 
 #include "node.h"
+// #include "function_pointers.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -92,20 +93,21 @@ void rotate_list(list *lst, int offset) {
 // Reverses the list, with the original "tail" node
 // becoming the new head node.
 void reverse_list(list *lst) {
-    node *last = lst->head;
-    node *prev = lst->head;
-    node *cur = lst->head->next;
-    node *head = lst->head->next;
-    while (head != last) {
-        head = head->next;
+    if (lst->head != NULL) {
+        node *last = lst->head;
+        node *prev = lst->head;
+        node *cur = lst->head->next;
+        node *head = lst->head->next;
+        while (head != last) {
+            head = head->next;
+            cur->next = prev;
+            prev = cur;
+            cur = head;
+        }
         cur->next = prev;
-        prev = cur;
-        cur = head;
+        lst->head = prev;
     }
-    cur->next = prev;
-    lst->head = prev;
 
- 
 }
 
 // Resets list to an empty state (no nodes) and frees
@@ -129,16 +131,15 @@ void reset_list(list *lst) {
 // Traverses list and applies func on data values of
 // all elements in the list.
 void map(list *lst, int (*func)(int)) {
-    if (lst->head == NULL) {
-        func(lst->head);
-    } else {
+    if (lst->head != NULL) {
         node *temp = lst->head->next;
         while (temp != lst->head) {
-            func(temp);
+            temp->data = func(temp->data);
             temp = temp->next;
         }
-        func(temp);
+        temp->data = func(temp->data);
     }
+    
 }
 
 // Traverses list and returns the sum of the data values
