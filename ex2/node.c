@@ -25,7 +25,7 @@ void insert_node_at(list *lst, int index, int data) {
 
     node *temp = lst->head;
 
-    if (temp == NULL) {
+    if (lst->head == NULL) {
         lst->head = newNode;
         newNode->next = newNode;
     } else if (temp != NULL) {
@@ -90,37 +90,40 @@ void rotate_list(list *lst, int offset) {
 // Reverses the list, with the original "tail" node
 // becoming the new head node.
 void reverse_list(list *lst) {
-    node *last = lst->head;
-    node *prev = lst->head;
-    node *cur = lst->head->next;
-    node *head = lst->head->next;
-    while (head != last) {
-        head = head->next;
+    if (lst->head != NULL) {
+        node *last = lst->head;
+        node *prev = lst->head;
+        node *cur = lst->head->next;
+        node *head = lst->head->next;
+        while (head != last) {
+            head = head->next;
+            cur->next = prev;
+            prev = cur;
+            cur = head;
+        }
         cur->next = prev;
-        prev = cur;
-        cur = head;
+        lst->head = prev;
     }
-    cur->next = prev;
-    lst->head = prev;
-
  
 }
 
 // Resets list to an empty state (no nodes) and frees
 // any allocated memory in the process
 void reset_list(list *lst) {
-    if (lst->head->next == lst->head) {
+    // if (lst->head->next == lst->head) {
+    //     free(lst->head);
+    //     lst->head = NULL;
+    // } 
+    if (lst->head != NULL) {
+
+        node *ptr = lst->head->next;
+        while (ptr != lst->head) {
+            node *temp = ptr->next;
+            free(ptr);
+            ptr = temp;
+        }
         free(lst->head);
-        free(lst->head->next);
         lst->head = NULL;
-    } 
-    node *ptr = lst->head->next;
-    while (ptr != lst->head) {
-        node *temp = ptr->next;
-        free(ptr);
-        ptr = temp;
     }
-    free(lst->head);
-    lst->head = NULL;
 }
 
