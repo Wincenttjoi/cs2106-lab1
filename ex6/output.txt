@@ -1,2 +1,0 @@
-execve("./pid_checker.c", ["./pid_checker.c"], 0x7ffef50c5c10 /* 28 vars */) = -1 ENOEXEC (Exec format error)
-+++ exited with 1 +++
