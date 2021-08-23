@@ -9,9 +9,9 @@
 
 # Fill the below up
 hostname=$HOSTNAME
-machine_hardware=$(uname -m)
+machine_hardware="$(uname) $(uname -m)"
 max_user_process_count=$(ulimit -u)
-user_process_count=$(ps)
+user_process_count=$(ps -e | wc -l)
 user_with_most_processes=$(ps -eo user=|sort -nr|uniq -c | awk '{print $2}' | head -1)
 mem_free_percentage=$(free | grep Mem | awk '{print $4/$2 * 100.0}')
 swap_free_percentage=$(free | grep Swap | awk '{print $4/$2 * 100.0}')
