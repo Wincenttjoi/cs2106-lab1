@@ -94,4 +94,7 @@ void run_instruction(FILE *f) {
         }
     }
 
+    reset_list(lst);
+    free(lst);
+
 }

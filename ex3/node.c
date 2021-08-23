@@ -45,7 +45,7 @@ void insert_node_at(list *lst, int index, int data) {
             lst->head = newNode;
             last->next = lst->head;
         } else {
-            node *cur = (node*)malloc(sizeof(node));
+            node *cur;
             cur = temp->next;
             temp->next = newNode;
             newNode->next = cur;
@@ -78,7 +78,6 @@ void delete_node_at(list *lst, int index) {
             temp->next = temp->next->next; 
         }
     }
-
 
 }
 
